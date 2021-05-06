@@ -31,6 +31,13 @@ public class User extends CommonEntity{
 	@Size(max = 13)
 	private String phonenumber;
 	
+	@Size(max=20)
+	private String firstname;
+	
+	@Size(max=20)
+	
+	private String lastname;
+	
 	
 	private Boolean active;
 
