@@ -4,6 +4,7 @@
 package com.base.normalindia.entity;
 
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+
 
 /**
  * @author balajir
@@ -40,6 +43,13 @@ public class User extends CommonEntity{
 	
 	
 	private Boolean active;
+	
+
+//	
+//
+//	@ManyToOne(targetEntity=Report.class,fetch=FetchType.LAZY)
+//	@JoinColumn(name="report_id")
+//	private Report report;
 
 
 	public Long getId() {
@@ -70,6 +80,39 @@ public class User extends CommonEntity{
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
+
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+
+	public String getLastname() {
+		return lastname;
+	}
+
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+
+
+
+//
+//	public Report getReport() {
+//		return report;
+//	}
+//
+//
+//	public void setReport(Report report) {
+//		this.report = report;
+//	}
 
 
 	

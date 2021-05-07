@@ -1,28 +1,31 @@
 package com.base.normalindia.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+
+import java.util.List;
+
 
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-
+import com.base.normalindia.entity.User;
 
 
 
 @Entity
 @Table(name="report")
 @Cacheable(false)
-public class Report {
+public class Report extends CommonEntity{
 	
 	
 
@@ -33,17 +36,16 @@ public class Report {
 	
 	
 
-	@OneToMany(cascade=CascadeType.PERSIST,mappedBy="report")
-	private Set<Information> information=new HashSet<>();
-	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="report")
+	private List<Information> information=new ArrayList<>();
+
+	@Transient
+	private User user;
+
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="report")
+	private List<Comment> comments=new ArrayList<>();
 	
 
-	@OneToMany(cascade=CascadeType.PERSIST,mappedBy="report")
-	private Set<Comment> comments=new HashSet<>();
-	
-	
-	@OneToOne(cascade=CascadeType.PERSIST,mappedBy="report")
-	private Organisation org;
 
 
 
@@ -59,15 +61,74 @@ public class Report {
 
 
 
-	public Set<Information> getInformation() {
+	public List<Information> getInformation() {
 		return information;
 	}
 
 
 
-	public void setInformation(Set<Information> information) {
+	public void setInformation(List<Information> information) {
+		
+		
 		this.information = information;
+		
+		for(Information in:this.information) {
+			
+		in.setReport(this);
+		}
 	}
+
+
+
+	public List<Comment> getComments() {
+		
+		return comments;
+	}
+
+
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+		for(Comment in:this.comments) {
+			
+		in.setReport(this);
+		}
+	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+//
+//	public List<User> getUser() {
+//		return user;
+//	}
+//
+//
+//
+//	public void setUser(List<User> user) {
+//		this.user = user;
+//		
+//		for(User in:this.user) {
+//			
+//			in.setReport(this);
+//			}
+//	}
+	
+	
+
+
+
+
 	
 	
 

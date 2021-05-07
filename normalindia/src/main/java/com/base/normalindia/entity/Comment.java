@@ -5,10 +5,13 @@ import java.sql.Timestamp;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,11 +29,11 @@ public class Comment {
 		this.like_count = like_count;
 	}
 
-	public Comment(String text_message, Timestamp timestamp, User user,Integer like_count) {
+	public Comment(String text_message, Timestamp timestamp, Integer like_count) {
 		super();
 		this.text_message = text_message;
 		this.insert_ts = timestamp;
-		this.user = user;
+		
 		this.like_count=like_count;
 	}
 	
@@ -53,12 +56,15 @@ public class Comment {
 	@Column(name="like_count")
 	private Integer like_count;
 	
-	@ManyToOne
-	private User user;
+    
 	
 
-	@ManyToOne
+	@ManyToOne(targetEntity=Report.class,fetch=FetchType.LAZY)
+	@JoinColumn(name="report_id")
 	private Report report;
+
+	
+
 
 	public Integer getComment_id() {
 		return comment_id;
@@ -84,14 +90,9 @@ public class Comment {
 		this.insert_ts = insert_ts;
 	}
 
-	public User getUser() {
-		return user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Integer getLike_count() {
+	
+public Integer getLike_count() {
 		return like_count;
 	}
 
