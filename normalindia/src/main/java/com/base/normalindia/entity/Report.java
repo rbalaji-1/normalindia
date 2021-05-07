@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.base.normalindia.entity.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -37,12 +38,14 @@ public class Report extends CommonEntity{
 	
 
 	@OneToMany(cascade = CascadeType.ALL,mappedBy="report")
+	
 	private List<Information> information=new ArrayList<>();
 
 	@Transient
 	private User user;
 
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="report")
+	
 	private List<Comment> comments=new ArrayList<>();
 	
 

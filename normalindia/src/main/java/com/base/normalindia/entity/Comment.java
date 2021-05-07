@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -61,6 +63,7 @@ public class Comment {
 
 	@ManyToOne(targetEntity=Report.class,fetch=FetchType.LAZY)
 	@JoinColumn(name="report_id")
+	@JsonIgnore
 	private Report report;
 
 	

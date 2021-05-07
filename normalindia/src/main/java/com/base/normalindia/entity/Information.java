@@ -12,9 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="information")
 @Cacheable(false)
+@DynamicUpdate
 public class Information extends CommonEntity{
 	
 	
@@ -24,7 +29,7 @@ public class Information extends CommonEntity{
 	@Column(name="information_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	
-	private Integer information_id;
+	private Integer informationid;
 	
 	
 	private String type;
@@ -41,14 +46,15 @@ public class Information extends CommonEntity{
 	
 	@ManyToOne(targetEntity=Report.class,fetch=FetchType.LAZY)
 	@JoinColumn(name="report_id")
+	@JsonIgnore
 	private Report report;
 
 	public Integer getInformation_id() {
-		return information_id;
+		return informationid;
 	}
 
 	public void setInformation_id(Integer information_id) {
-		this.information_id = information_id;
+		this.informationid = information_id;
 	}
 
 	public String getType() {
