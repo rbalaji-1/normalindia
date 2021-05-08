@@ -18,29 +18,21 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="organisation")
+@Table(name="report_org_link")
 @Cacheable(false)
 public class Organisation {
 	
 
 	@Id
-	@Column(name="org_id")
+	@Column(name="link_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer org_id;
+	private Integer id;
 	
 	
+	@OneToOne
+	private Hospital hospital;
 	
-	private String org_name;
-	
-	
-	
-	private String Address;
-	
-	private String state;
-	
-	private String city;
-	
-	private String country;
+	private String name;
 	
 
 	@OneToOne(cascade=CascadeType.PERSIST)
@@ -49,6 +41,39 @@ public class Organisation {
 	
 	
 	
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+
+
+	public Hospital getHospital() {
+		return hospital;
+	}
+
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 	public Report getReport() {
 		return report;
 	}
@@ -58,85 +83,6 @@ public class Organisation {
 		this.report = report;
 	}
 
-
-	@Size(max=13)
-	private String phonenumber;
-	
-	
-
-
-	public String getState() {
-		return state;
-	}
-
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-
-	public String getCity() {
-		return city;
-	}
-
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-
-	public String getCountry() {
-		return country;
-	}
-
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-
-	public Integer getOrg_id() {
-		return org_id;
-	}
-
-
-	public void setOrg_id(Integer org_id) {
-		this.org_id = org_id;
-	}
-
-
-	public String getOrg_name() {
-		return org_name;
-	}
-
-
-	public void setOrg_name(String org_name) {
-		this.org_name = org_name;
-	}
-
-
-	public String getAddress() {
-		return Address;
-	}
-
-
-	public void setAddress(String address) {
-		Address = address;
-	}
-
-
-	public String getPhonenumber() {
-		return phonenumber;
-	}
-
-
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
-	}
-	
-	
-	
-	
 	
 
 }

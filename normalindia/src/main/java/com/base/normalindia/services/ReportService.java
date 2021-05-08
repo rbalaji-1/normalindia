@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.base.normalindia.entity.Hospital;
 import com.base.normalindia.entity.Information;
 import com.base.normalindia.entity.Organisation;
 import com.base.normalindia.entity.Report;
@@ -16,6 +17,8 @@ import com.base.normalindia.repository.InformationRepository;
 import com.base.normalindia.repository.OrganisationRepository;
 import com.base.normalindia.repository.ReportRepository;
 import com.base.normalindia.repository.UserRepository;
+import com.base.normalindia.repository.hospitalRepository;
+import com.base.normalindia.util.HospitalSpecification;
 import com.base.normalindia.util.OrganisationSpecification;
 import com.base.normalindia.util.SearchCriteria;
 
@@ -33,6 +36,10 @@ public class ReportService {
 	@Autowired
 	InformationRepository inforepo;
 	
+
+	@Autowired
+	hospitalRepository hrepo;
+	
 	@Autowired
 	UserRepository usr;
 	public String addreport(Organisation org) {
@@ -46,6 +53,8 @@ public class ReportService {
 			usr.save(us);
 			
 		}
+		
+		
 		org.getReport().setCreatedOn(new Date());
 		org.getReport().setCreatedBy(us.getPhonenumber());
 		
@@ -93,6 +102,22 @@ public class ReportService {
 	          return inof;
 	        }
 		return null;
+	}
+	public List<Hospital> gethospitallistbystate(String state) {
+		// TODO Auto-generated method stub
+		
+		HospitalSpecification opsec=new HospitalSpecification(new SearchCriteria("state", ":", state));
+		
+		
+		
+		return hrepo.findAll(Specification.where(opsec));
+		
+	}
+	public List<Hospital> gethospitallistbypin(String pincode) {
+		// TODO Auto-generated method stub
+		
+		return hrepo.findHospitalbypin(pincode);
+		
 	}
 
 }

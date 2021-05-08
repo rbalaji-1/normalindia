@@ -11,9 +11,13 @@ import org.springframework.data.repository.query.Param;
 import com.base.normalindia.entity.Organisation;
 
 public interface OrganisationRepository  extends JpaRepository<Organisation,Integer>,JpaSpecificationExecutor<Organisation> {
+//	
+//	
+//	@Query("SELECT o FROM Organisation o WHERE o.state = :state")
+//	 List<Organisation> findByStateContaining(@Param("state") String state);
 	
 	
-	@Query("SELECT o FROM Organisation o WHERE o.state = :state")
-	 List<Organisation> findByStateContaining(@Param("state") String state);
+	
+	
 
 }
